@@ -9,6 +9,10 @@ session_start();
 $username = $_POST['username'] ?? null;
 $password = $_POST['password'] ?? null;
 
+if ($username === null || $password === null) {
+    echo $twig->render('login.html.twig');
+    die();
+}
 
 if ($username !== 'user' || $password !== 'pass') {
     echo $twig->render('login.html.twig', ['error' => 'login salah']);
