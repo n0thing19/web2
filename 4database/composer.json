@@ -1,0 +1,15 @@
+{
+    "name": "uph/database",
+    "autoload": {
+        "psr-4": {
+            "Uph\\Database\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "n0thing19",
+            "email": "62434029+n0thing19@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
