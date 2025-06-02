@@ -9,5 +9,8 @@ $q = $db->query('SELECT * FROM todo');
 $rows = $q->fetchAll();
 echo $twig->render(
     'list.twig.html',
-    ['rows' => $rows]
+    [
+        'rows' => $rows,
+        'rows_count' => count($rows)
+    ]
 );
