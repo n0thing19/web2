@@ -11,5 +11,7 @@
             "email": "62434029+n0thing19@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {
+        "twig/twig": "^3.21"
+    }
 }
