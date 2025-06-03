@@ -5,6 +5,24 @@ require_once 'vendor/autoload.php';
 use Uph\Database\DB;
 use Uph\Database\Twig;
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = $_POST['id'] ?? null;
+
+    if (!$id){
+        header('Location: list.php');
+        die();
+    }
+    
+    $db = DB::getDB();
+    $q = $db->prepare(
+        'DELETE FROM todo WHERE id = :id'
+    );
+    
+    $q->execute(['id' => $id]);
+    
+}
+
+
 $id = $_GET['id'] ?? null;
 
 if (!$id){

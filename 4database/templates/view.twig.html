@@ -6,6 +6,10 @@
                 <span>{{ todo.id }}</span>
             </div>
             <div>
+                <span>Task:</span>
+                <span>{{ todo.task }}</span>
+            </div>
+            <div>
                 <span>Status:</span>
                 <span>{{ todo.status }}</span>
             </div>
@@ -18,5 +22,15 @@
                 <span>{{ todo.updated_at }}</span>
             </div>
         </div>
+
+        <div>
+            <a href="list.php">Back to list</a>
+        </div>
+
+        <form action="view.php" method="POST">
+            <input type="hidden" name="id" value="{{ todo.id }}">
+            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus item ini?');">Delete</button>
+        </form>
+
     </body>
 </html>
