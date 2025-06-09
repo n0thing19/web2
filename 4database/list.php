@@ -26,7 +26,7 @@ if (count($where) > 0) {
     $sql .= ' WHERE ' . implode(' AND ', $where);
 }
 
-die($sql);
+// die($sql);
 
 $q = $db->prepare($sql);
 $q->execute($params);
