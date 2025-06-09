@@ -39,7 +39,7 @@ Setiap folder di dalam repositori ini adalah sebuah proyek mini yang independen.
     ```
 
 3.  **Jalankan Latihan Individual**
-    -   Buka browser dan akses setiap folder latihan secara terpisah. Ganti `NAMA_REPO` dengan nama folder hasil clone.
+    -   Buka browser dan akses setiap folder latihan secara terpisah.
     -   Contoh:
         -   `http://localhost/1getpost/`
         -   `http://localhost/3form/index.php`
