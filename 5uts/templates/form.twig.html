@@ -1,0 +1,34 @@
+<html>
+    <body>
+        <h1>{{ title }}</h1>
+        <form action="{{ action }}" method="POST">
+
+            <label>ISBN:</label>
+            <input type="text" name="isbn" value="{{isbn}}">
+            <br><br>
+
+            <label>Judul:</label>
+            <input type="text" name="judul" value="{{judul}}">
+            <br><br>
+
+            <label>Kategori:</label>
+            <select name="kategori">
+                <option value="fiksi" {% if kategori == 'fiksi' %}selected{% endif %}>Fiksi</option>
+                <option value="non-fiksi" {% if kategori == 'non-fiksi' %}selected{% endif %}>Non Fiksi</option>
+            </select>
+            <br><br>
+
+            <label>Halaman:</label>
+            <input type="text" name="halaman" value="{{halaman}}">
+            <br><br>
+
+            <label>Pengarang:</label>
+            <input type="text" name="pengarang" value="{{pengarang}}">
+
+            <div>
+                <input type="submit" value="Simpan">
+            </div>
+        </form>
+        <button onclick="window.location.href='list.php'">Batal</button>
+    </body> 
+</html>

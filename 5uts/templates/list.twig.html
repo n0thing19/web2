@@ -1,0 +1,82 @@
+<html>
+<head>
+    <title>List Buku</title>
+</head>
+<body>
+    <h1>List Buku</h1>
+    <button onclick="window.location.href='create.php'">Tambahkan Buku Baru</button>
+    <br><br>
+    
+    <form method="GET" action="list.php">
+        <input type="text" name="search" value="{{ search }}" placeholder="Cari ISBN, Judul, atau Pengarang" style="width: 300px;"/>
+        
+        <select name="search_kategori">
+            <option value="" {% if kategori == '' %}selected{% endif %}>Semua Kategori</option>
+            <option value="fiksi" {% if kategori == 'fiksi' %}selected{% endif %}>Fiksi</option>
+            <option value="non-fiksi" {% if kategori == 'non-fiksi' %}selected{% endif %}>Non Fiksi</option>
+        </select>
+
+        <select name="sort_by">
+            <option value="" {% if sort_by == '' %}selected{% endif %}>Sort by..</option>
+            <option value="judul" {% if sort_by == 'judul' %}selected{% endif %}>Sort by Judul</option>
+            <option value="pengarang" {% if sort_by == 'pengarang' %}selected{% endif %}>Sort by Pengarang</option>
+        </select>
+        
+        <select name="sort_order">
+            <option value="asc" {% if sort_order == 'asc' %}selected{% endif %}>Ascending</option>
+            <option value="desc" {% if sort_order == 'desc' %}selected{% endif %}>Descending</option>
+        </select>
+        
+        <input type="submit" value="Apply">
+    </form>
+
+    <br>
+
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ISBN</th>
+                <th>Judul</th>
+                <th>Kategori</th>
+                <th>Halaman</th>
+                <th>Pengarang</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.judul }}</td>
+                <td>{{ book.kategori }}</td>
+                <td>{{ book.halaman }}</td>
+                <td>{{ book.pengarang }}</td>
+                <td>
+                    <button onclick="window.location.href='edit.php?id={{ book.id }}'">Edit</button>
+                    <button onclick="if(confirm('Apakah Anda yakin ingin menghapus buku ini?')) { window.location.href='delete.php?id={{ book.id }}' }">Delete</button>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="7" style="text-align: center;">Tidak ada buku yang ditemukan.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>Menampilkan {{ books_count }} dari {{ total_data }} buku</p>
+
+    {% if total_pages > 1 %}
+    <div style="margin-top: 20px;">
+        {% for page in 1..total_pages %}
+            <button 
+                onclick="window.location.href='?page={{ page }}&search={{ search }}&search_kategori={{ kategori }}&sort_by={{ sort_by }}&sort_order={{ sort_order }}'"
+                {{ page == current_page ? 'disabled' : '' }}>
+                {{ page }}
+            </button>
+        {% endfor %}
+    </div>
+    {% endif %}
+    </body>
+</html>

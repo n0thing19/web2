@@ -1,0 +1,17 @@
+{
+    "name": "uph/uts",
+    "autoload": {
+        "psr-4": {
+            "Uph\\Uts\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "n0thing19",
+            "email": "62434029+n0thing19@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.21"
+    }
+}
