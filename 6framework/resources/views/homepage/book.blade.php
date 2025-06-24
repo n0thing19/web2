@@ -49,22 +49,22 @@
 
                     <!-- Book Info -->
                     <div class="md:w-2/3">
-                        <span class="bg-blue-100 text-blue-600 px-3 py-1 text-sm font-semibold rounded-full">Fiksi Ilmiah</span>
+                        <span class="bg-blue-100 text-blue-600 px-3 py-1 text-sm font-semibold rounded-full">{{$book['category']}}</span>
                         <h1 class="text-4xl font-bold text-gray-900 mt-4 mb-2">{{ $book['title'] }}</h1>
-                        <p class="text-xl text-gray-600 mb-6">oleh <span class="font-semibold text-blue-600">Penulis A</span></p>
+                        <p class="text-xl text-gray-600 mb-6">oleh <span class="font-semibold text-blue-600">{{$book['author']}}</span></p>
 
                         <h2 class="text-2xl font-bold text-gray-800 border-b pb-2 mb-4">Sinopsis</h2>
-                        <p class="text-gray-600 leading-relaxed mb-6">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        <p class="text-gray-600 leading-relaxed mb-6">\
+                            {{ $book['excerpt'] }}
                         </p>
 
                         <h3 class="text-lg font-bold text-gray-800 mb-3">Detail Buku</h3>
                         <div class="grid grid-cols-2 gap-4 text-gray-600 mb-8">
-                            <div><span class="font-semibold text-gray-900">Penerbit:</span> Pustaka Jaya</div>
-                            <div><span class="font-semibold text-gray-900">Tahun Terbit:</span> 2023</div>
+                            <div><span class="font-semibold text-gray-900">Penerbit:</span> {{$book['author']}}</div>
+                            <div><span class="font-semibold text-gray-900">Tahun Terbit:</span> {{$book['published_year']}}</div>
                             <div><span class="font-semibold text-gray-900">Jumlah Halaman:</span> 320</div>
                             <div><span class="font-semibold text-gray-900">Bahasa:</span> Indonesia</div>
-                            <div><span class="font-semibold text-gray-900">ISBN:</span> 978-123-456-789-0</div>
+                            <div><span class="font-semibold text-gray-900">ISBN:</span> {{$book['isbn']}}</div>
                             <div><span class="font-semibold text-gray-900">Stok Tersedia:</span> <span class="text-green-600 font-bold">5</span></div>
                         </div>
 
