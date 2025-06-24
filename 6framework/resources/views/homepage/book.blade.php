@@ -1,43 +1,5 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Buku - Judul Buku | Perpustakaan Digital</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-        }
-    </style>
-</head>
-<body class="bg-gray-50 text-gray-800">
-
-    <!-- Header / Navigation -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Disarankan untuk mengganti href="#" dengan link ke homepage (misal: "index.html") -->
-            <a href="index.html" class="text-2xl font-bold text-blue-600">Perpus<span class="text-yellow-500">Digital</span></a>
-            <div class="hidden md:flex items-center space-x-6">
-                 <a href="index.html#home" class="text-gray-600 hover:text-blue-600 transition duration-300">Home</a>
-                <a href="index.html#latest-books" class="text-gray-600 hover:text-blue-600 transition duration-300">Buku Terbaru</a>
-                <a href="index.html#categories" class="text-gray-600 hover:text-blue-600 transition duration-300">Kategori</a>
-                <a href="index.html#news" class="text-gray-600 hover:text-blue-600 transition duration-300">Berita</a>
-            </div>
-             <a href="index.html#register" class="hidden md:block bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition duration-300">Daftar Anggota</a>
-        </nav>
-    </header>
-
-    <main class="container mx-auto px-6 py-12">
+@extends('app')
+@section('content')
         <!-- Book Detail Section -->
         <section id="book-detail">
             <div class="bg-white p-8 rounded-xl shadow-lg">
@@ -133,20 +95,4 @@
             </div>
         </section>
 
-    </main>
-    
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white">
-        <div class="container mx-auto px-6 py-12">
-             <div class="text-center text-gray-400">
-                <p>&copy; <span id="year"></span> PerpusDigital. Semua Hak Cipta Dilindungi.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Set tahun footer secara dinamis
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
-</body>
-</html>
+@endsection

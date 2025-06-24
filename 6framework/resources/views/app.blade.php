@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Lucide Icons -->
+    <!-- Lucide Icons (Dependency for the script block) -->
     <script src="https://unpkg.com/lucide-react@latest/dist/lucide-react.js"></script>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -52,11 +52,25 @@
                 <a href="#categories" class="text-gray-600 hover:text-blue-600 transition duration-300">Kategori</a>
                 <a href="#news" class="text-gray-600 hover:text-blue-600 transition duration-300">Berita</a>
             </div>
-            <a href="#register" class="hidden md:block bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition duration-300">Daftar Anggota</a>
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="hidden md:block bg-red-600 text-white px-5 py-2 rounded-full hover:bg-red-700 transition duration-300">Logout</button>
-            </form>
+            
+            <!-- Action Buttons (Desktop) -->
+            <div class="hidden md:flex items-center space-x-4">
+                {{-- Blok ini akan ditampilkan jika pengguna BELUM login --}}
+                @guest
+                    <a href="{{ route('login') }}" class="text-gray-700 hover:text-blue-600 transition duration-300 font-medium">Login</a>
+                    <a href="#register" class="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition duration-300">Daftar Anggota</a>
+                @endguest
+
+                {{-- Blok ini akan ditampilkan jika pengguna SUDAH login --}}
+                @auth
+                    <span class="text-gray-700">Selamat datang, {{ Auth::user()->name }}</span>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="bg-red-600 text-white px-5 py-2 rounded-full hover:bg-red-700 transition duration-300">Logout</button>
+                    </form>
+                @endauth
+            </div>
+
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
@@ -68,11 +82,34 @@
             <a href="#latest-books" class="block py-2 text-gray-600 hover:text-blue-600">Buku Terbaru</a>
             <a href="#categories" class="block py-2 text-gray-600 hover:text-blue-600">Kategori</a>
             <a href="#news" class="block py-2 text-gray-600 hover:text-blue-600">Berita</a>
-            <a href="#register" class="mt-2 block w-full text-center bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700">Daftar Anggota</a>
+            <div class="border-t border-gray-200 mt-4 pt-4">
+                {{-- Tombol untuk pengguna yang BELUM login di tampilan mobile --}}
+                @guest
+                <x-auth-button action="{{ route('login') }}" method="GET" class="w-full text-center mb-3 bg-yellow-500 text-white px-5 py-2 rounded-full hover:bg-yellow-600 transition duration-300">
+                    Login
+                </x-auth-button>
+                    {{-- <a href="{{ route('login') }}" class="block w-full text-center mb-3 bg-yellow-500 text-white px-5 py-2 rounded-full hover:bg-yellow-600 transition duration-300">Login</a> --}}
+                    <a href="#register" class="block w-full text-center bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition duration-300">Daftar Anggota</a>
+                @endguest
+
+                {{-- Tombol untuk pengguna yang SUDAH login di tampilan mobile --}}
+                @auth
+                    <div class="text-center text-gray-700 mb-3">Selamat datang, {{ Auth::user()->name }}</div>
+                    <x-auth-button action="{{ route('logout') }}" method="POST" class="w-full text-center bg-red-600 text-white px-5 py-2 rounded-full hover:bg-red-700 transition duration-300">
+                        @csrf
+                        Logout
+                    </x-auth-button>
+                    {{-- <form action="{{ route('logout') }}" method="POST" class="w-full">
+                        @csrf
+                        <button type="submit" class="w-full text-center bg-red-600 text-white px-5 py-2 rounded-full hover:bg-red-700 transition duration-300">Logout</button>
+                    </form> --}}
+                @endauth
+            </div>
         </div>
     </header>
 
     <main>
+        {{-- Konten utama halaman Anda akan dirender di sini --}}
         @yield('content')
     </main>
     
@@ -130,24 +167,25 @@
         // Set tahun footer secara dinamis
         document.getElementById('year').textContent = new Date().getFullYear();
         
-        // Render Lucide Icons
+        // (Optional) Script untuk merender Lucide Icons jika Anda membutuhkannya di konten lain.
+        // Jika tidak ada icon yang perlu dirender di body, blok ini bisa dihapus.
+        // Pastikan ada elemen dengan id yang sesuai (misal: <div id="icon-book-open"></div>)
+        // agar script ini tidak error.
+        /*
         const createIcon = (containerId, iconName, props = {}) => {
+            const container = document.getElementById(containerId);
             const IconComponent = lucide[iconName];
-            if (IconComponent) {
+            if (container && IconComponent) {
                 ReactDOM.render(
                     React.createElement(IconComponent, { size: 48, ...props }),
-                    document.getElementById(containerId)
+                    container
                 );
             }
         };
 
         createIcon('icon-book-open', 'BookOpen');
         createIcon('icon-atom', 'Atom');
-        createIcon('icon-landmark', 'Landmark');
-        createIcon('icon-lightbulb', 'Lightbulb');
-        createIcon('icon-palette', 'Palette');
-        createIcon('icon-briefcase', 'Briefcase');
-
+        */
     </script>
 </body>
 </html>
