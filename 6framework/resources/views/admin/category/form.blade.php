@@ -1,20 +1,50 @@
 @extends('app')
+
 @section('content')
-    <form method="post" action="{{ $action }}" class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-        @csrf
-
-        <div class="mb-4">
-            <label for="name" class="block text-sm font-medium text-gray-700">Category Name</label>
-            <input type="text" id="name" name="name" value="{{ old('name', $category->name ?? '') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500" required>
-            
+<div class="bg-gray-50 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-xl w-full space-y-8 bg-white p-8 sm:p-10 rounded-2xl shadow-xl">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">{{ $formHeading }}</h1>
+            <p class="mt-2 text-sm text-gray-600">
+                Lengkapi informasi di bawah ini untuk {{ $category->exists ? 'memperbarui' : 'membuat' }} kategori.
+            </p>
         </div>
 
-        <div class="flex items-center justify-between">
-            <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 shadow-md">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2"><path d="M12 5v14m7-7H5"></path></svg>
-                Submit
-            </button>
-            <a href="{{ route('admin.category.index') }}" class="text-gray-600 hover:text-gray-800">Cancel</a>
-        </div>
-    </form>
+        <form action="{{ $action }}" method="POST" class="space-y-6">
+            @csrf
+            @if ($category->exists)
+                @method('PUT')
+            @endif
+
+            <div>
+                <label for="name" class="block text-sm font-bold text-gray-700 mb-2">
+                    Nama Kategori
+                </label>
+                <div class="mt-1">
+                    <input type="text"
+                           name="name"
+                           id="name"
+                           value="{{ old('name', $category->name) }}"
+                           class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out"
+                           placeholder="cth: Makanan Ringan"
+                           required>
+                </div>
+                @error('name')
+                    <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="border-t border-gray-200 my-6"></div>
+
+            <div class="flex justify-end space-x-4">
+                <a href="{{ route('admin.category.index') }}" class="px-6 py-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-300">
+                    Batal
+                </a>
+                <button type="submit" class="px-6 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 shadow-md">
+                    {{ $category->exists ? 'Update Kategori' : 'Simpan Kategori' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection
