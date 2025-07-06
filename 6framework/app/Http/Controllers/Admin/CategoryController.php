@@ -11,12 +11,22 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::paginate(10);
-        return view('admin.category.index', [
-            'categories' => $categories,
-        ]);
+        $search = $request->input('search');
+        $sortBy = $request->input('sort_by', 'name'); 
+        $sortDirection = $request->input('sort_direction', 'asc');
+        $query = Category::query();
+
+        if ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        $query->orderBy($sortBy, $sortDirection);
+
+        $categories = $query->paginate(10)->withQueryString();
+
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
