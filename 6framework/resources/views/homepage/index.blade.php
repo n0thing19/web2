@@ -24,47 +24,19 @@
             <h2 class="text-3xl font-bold text-center text-gray-800 mb-2">Koleksi Terbaru</h2>
             <p class="text-center text-gray-600 mb-12">Buku-buku yang baru saja kami tambahkan ke dalam koleksi.</p>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                <!-- Book Card 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition duration-300 "><a href="/book/1" class="block">
-                    <img src="https://placehold.co/300x450/3498db/ffffff?text=Buku+Satu" alt="Sampul Buku Satu" class="w-full h-64 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-semibold text-lg truncate">Judul Buku Satu</h3>
-                        <p class="text-gray-600 text-sm">Penulis A</p>
-                    </div>
+                
+                @foreach ($books as $book)
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition duration-300">
+                    <a href="{{ route('books.show', $book->id) }}" class="block">
+                        <img src="https://placehold.co/300x450/3498db/ffffff?text=Cover" alt="Sampul buku {{ $book->title }}" class="w-full h-64 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg truncate">{{ $book->title }}</h3>
+                            <p class="text-gray-600 text-sm">{{ $book->author }}</p>
+                        </div>
                     </a>
                 </div>
-                <!-- Book Card 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition duration-300">
-                    <img src="https://placehold.co/300x450/2ecc71/ffffff?text=Buku+Dua" alt="Sampul Buku Dua" class="w-full h-64 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-semibold text-lg truncate">Judul Buku Dua</h3>
-                        <p class="text-gray-600 text-sm">Penulis B</p>
-                    </div>
-                </div>
-                <!-- Book Card 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition duration-300">
-                    <img src="https://placehold.co/300x450/e74c3c/ffffff?text=Buku+Tiga" alt="Sampul Buku Tiga" class="w-full h-64 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-semibold text-lg truncate">Judul Buku Tiga</h3>
-                        <p class="text-gray-600 text-sm">Penulis C</p>
-                    </div>
-                </div>
-                <!-- Book Card 4 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition duration-300">
-                    <img src="https://placehold.co/300x450/f1c40f/ffffff?text=Buku+Empat" alt="Sampul Buku Empat" class="w-full h-64 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-semibold text-lg truncate">Judul Buku Empat</h3>
-                        <p class="text-gray-600 text-sm">Penulis D</p>
-                    </div>
-                </div>
-                <!-- Book Card 5 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition duration-300">
-                    <img src="https://placehold.co/300x450/9b59b6/ffffff?text=Buku+Lima" alt="Sampul Buku Lima" class="w-full h-64 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-semibold text-lg truncate">Judul Buku Lima</h3>
-                        <p class="text-gray-600 text-sm">Penulis E</p>
-                    </div>
-                </div>
+                @endforeach
+
             </div>
         </div>
     </section>
